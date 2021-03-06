@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -85,11 +85,13 @@ namespace CalloutBot
                 for (int i = 1; i < 64; i++)
                 {
 
-                    int bestEntity = Read.BestEntity(ClientDLL);
-                    IntPtr EntityList = Memory.Read<IntPtr>(ClientDLL + Offsets.EntityList + bestEntity * 0x10);
+                   
+                  
                     IntPtr LocalPlayer = Memory.Read<IntPtr>(ClientDLL + Offsets.LocalPlayer);
                     if (LocalPlayer == IntPtr.Zero)
                         continue;
+                    int bestEntity = Read.BestEntity(ClientDLL);
+                    IntPtr EntityList = Memory.Read<IntPtr>(ClientDLL + Offsets.EntityList + bestEntity * 0x10);
                     if (Memory.Read<Int32>(LocalPlayer + Offsets.Health) < 1 || Memory.Read<Int32>(LocalPlayer + Offsets.Health) > 100)
                     {
                         if (alive == true)
